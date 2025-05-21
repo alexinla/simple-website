@@ -82,4 +82,179 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', animateOnScroll);
     // Initial check for elements in view
     animateOnScroll();
+
+    // DOM Elements
+    const likeButtons = document.querySelectorAll('.post-actions .fa-heart');
+    const commentInputs = document.querySelectorAll('.post-add-comment input');
+    const commentButtons = document.querySelectorAll('.post-add-comment button');
+    const storyAvatars = document.querySelectorAll('.story-avatar');
+    const followButtons = document.querySelectorAll('.follow');
+
+    // Like functionality
+    likeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            button.classList.toggle('fas');
+            button.classList.toggle('far');
+            if (button.classList.contains('fas')) {
+                button.style.color = '#ed4956';
+            } else {
+                button.style.color = '';
+            }
+        });
+    });
+
+    // Comment functionality
+    commentInputs.forEach((input, index) => {
+        const button = commentButtons[index];
+        
+        input.addEventListener('input', () => {
+            button.style.color = input.value.trim() ? '#0095f6' : '#b2dffc';
+        });
+        
+        button.addEventListener('click', () => {
+            const comment = input.value.trim();
+            if (comment) {
+                const commentsSection = input.closest('.post').querySelector('.post-comments');
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.innerHTML = `
+                    <span class="username">your_username</span>
+                    ${comment}
+                `;
+                commentsSection.appendChild(newComment);
+                input.value = '';
+                button.style.color = '#b2dffc';
+            }
+        });
+    });
+
+    // Story click effect
+    storyAvatars.forEach(avatar => {
+        avatar.addEventListener('click', () => {
+            avatar.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                avatar.style.transform = 'scale(1)';
+            }, 100);
+        });
+    });
+
+    // Follow button functionality
+    followButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (button.textContent === 'Follow') {
+                button.textContent = 'Following';
+                button.style.color = '#262626';
+            } else {
+                button.textContent = 'Follow';
+                button.style.color = '#0095f6';
+            }
+        });
+    });
+
+    // Double click to like
+    document.querySelectorAll('.post-image').forEach(post => {
+        post.addEventListener('dblclick', () => {
+            const likeButton = post.closest('.post').querySelector('.fa-heart');
+            likeButton.classList.remove('far');
+            likeButton.classList.add('fas');
+            likeButton.style.color = '#ed4956';
+        });
+    });
+
+    // Add hover effect to posts
+    document.querySelectorAll('.post').forEach(post => {
+        post.addEventListener('mouseenter', () => {
+            post.style.boxShadow = '0 0 10px rgba(0,0,0,0.1)';
+        });
+        
+        post.addEventListener('mouseleave', () => {
+            post.style.boxShadow = 'none';
+        });
+    });
+
+    // Add smooth scrolling for stories
+    const storiesContainer = document.querySelector('.stories');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    storiesContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        storiesContainer.style.cursor = 'grabbing';
+        startX = e.pageX - storiesContainer.offsetLeft;
+        scrollLeft = storiesContainer.scrollLeft;
+    });
+
+    storiesContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        storiesContainer.style.cursor = 'grab';
+    });
+
+    storiesContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        storiesContainer.style.cursor = 'grab';
+    });
+
+    storiesContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - storiesContainer.offsetLeft;
+        const walk = (x - startX) * 2;
+        storiesContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Add loading animation for images
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('load', () => {
+            img.style.opacity = '1';
+        });
+        
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.3s ease';
+    });
+
+    // Add notification for new followers
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #262626;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+
+    // Add CSS for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Simulate new follower notification
+    setTimeout(() => {
+        showNotification('New follower: @instagram_user');
+    }, 5000);
 }); 
