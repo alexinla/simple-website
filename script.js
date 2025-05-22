@@ -213,7 +213,78 @@ document.addEventListener('DOMContentLoaded', () => {
         img.style.transition = 'opacity 0.3s ease';
     });
 
-    // Add notification for new followers
+    // Hashtag click functionality
+    document.querySelectorAll('.hashtag').forEach(hashtag => {
+        hashtag.addEventListener('click', () => {
+            const tag = hashtag.textContent;
+            showNotification(`Searching for ${tag}`);
+            // In a real app, this would navigate to the hashtag page
+        });
+    });
+
+    // Enhanced post interactions
+    document.querySelectorAll('.post').forEach(post => {
+        const likeButton = post.querySelector('.fa-heart');
+        const bookmarkButton = post.querySelector('.fa-bookmark');
+        const commentInput = post.querySelector('.post-add-comment input');
+        const commentButton = post.querySelector('.post-add-comment button');
+        const postImage = post.querySelector('.post-image img');
+
+        // Double click to like
+        postImage.addEventListener('dblclick', () => {
+            likeButton.classList.remove('far');
+            likeButton.classList.add('fas');
+            likeButton.style.color = '#ed4956';
+            showNotification('Post liked!');
+        });
+
+        // Bookmark functionality
+        bookmarkButton.addEventListener('click', () => {
+            bookmarkButton.classList.toggle('far');
+            bookmarkButton.classList.toggle('fas');
+            if (bookmarkButton.classList.contains('fas')) {
+                showNotification('Post saved to bookmarks');
+            } else {
+                showNotification('Post removed from bookmarks');
+            }
+        });
+
+        // Comment input validation
+        commentInput.addEventListener('input', () => {
+            commentButton.style.color = commentInput.value.trim() ? '#0095f6' : '#b2dffc';
+            commentButton.disabled = !commentInput.value.trim();
+        });
+
+        // Enhanced comment submission
+        commentButton.addEventListener('click', () => {
+            const comment = commentInput.value.trim();
+            if (comment) {
+                const commentsSection = post.querySelector('.post-comments');
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.innerHTML = `
+                    <span class="username">your_username</span>
+                    ${comment}
+                `;
+                commentsSection.appendChild(newComment);
+                commentInput.value = '';
+                commentButton.style.color = '#b2dffc';
+                commentButton.disabled = true;
+                showNotification('Comment added!');
+            }
+        });
+    });
+
+    // Enhanced story interactions
+    document.querySelectorAll('.story').forEach(story => {
+        story.addEventListener('click', () => {
+            const username = story.querySelector('span').textContent;
+            showNotification(`Viewing ${username}'s story`);
+            // In a real app, this would open the story viewer
+        });
+    });
+
+    // Enhanced notification system
     function showNotification(message) {
         const notification = document.createElement('div');
         notification.className = 'notification';
@@ -229,6 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
             font-size: 14px;
             z-index: 1000;
             animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         `;
         
         document.body.appendChild(notification);
@@ -242,8 +314,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         
         @keyframes fadeOut {
