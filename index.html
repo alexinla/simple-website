@@ -3,239 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Clone</title>
+    <title>AI Chat Interface</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="nav-container">
-                <div class="logo">
-                    <i class="fab fa-instagram"></i>
-                    <span>Instagram Clone</span>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="new-chat">
+                <button class="new-chat-btn">
+                    <i class="fas fa-plus"></i>
+                    New Chat
+                </button>
+            </div>
+            <div class="chat-history">
+                <h3>Recent Chats</h3>
+                <div class="history-item active">
+                    <i class="fas fa-comment"></i>
+                    <span>Getting Started with AI</span>
                 </div>
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search">
+                <div class="history-item">
+                    <i class="fas fa-comment"></i>
+                    <span>Python Programming</span>
                 </div>
-                <div class="nav-icons">
-                    <i class="fas fa-home"></i>
-                    <i class="far fa-paper-plane"></i>
-                    <i class="far fa-plus-square"></i>
-                    <i class="far fa-compass"></i>
-                    <i class="far fa-heart"></i>
-                    <div class="profile-pic">
-                        <img src="https://source.unsplash.com/random/100x100/?portrait" alt="Profile">
-                    </div>
+                <div class="history-item">
+                    <i class="fas fa-comment"></i>
+                    <span>Web Development</span>
                 </div>
             </div>
-        </nav>
-    </header>
-
-    <main>
-        <div class="container">
-            <div class="stories">
-                <div class="story">
-                    <div class="story-avatar">
-                        <img src="https://source.unsplash.com/random/100x100/?portrait" alt="Story">
-                    </div>
-                    <span>Your Story</span>
-                </div>
-                <div class="story">
-                    <div class="story-avatar">
-                        <img src="https://source.unsplash.com/random/100x100/?travel" alt="Story">
-                    </div>
-                    <span>travel_life</span>
-                </div>
-                <div class="story">
-                    <div class="story-avatar">
-                        <img src="https://source.unsplash.com/random/100x100/?food" alt="Story">
-                    </div>
-                    <span>foodie_adventures</span>
-                </div>
-                <div class="story">
-                    <div class="story-avatar">
-                        <img src="https://source.unsplash.com/random/100x100/?fashion" alt="Story">
-                    </div>
-                    <span>style_daily</span>
-                </div>
-                <div class="story">
-                    <div class="story-avatar">
-                        <img src="https://source.unsplash.com/random/100x100/?fitness" alt="Story">
-                    </div>
-                    <span>fitness_goals</span>
-                </div>
-                <div class="story">
-                    <div class="story-avatar">
-                        <img src="https://source.unsplash.com/random/100x100/?art" alt="Story">
-                    </div>
-                    <span>art_creations</span>
-                </div>
-            </div>
-
-            <div class="feed">
-                <div class="post">
-                    <div class="post-header">
-                        <div class="post-user">
-                            <img src="https://source.unsplash.com/random/100x100/?travel" alt="User">
-                            <span>travel_life</span>
-                        </div>
-                        <i class="fas fa-ellipsis-h"></i>
-                    </div>
-                    <div class="post-image">
-                        <img src="https://source.unsplash.com/random/800x800/?bali" alt="Post">
-                    </div>
-                    <div class="post-actions">
-                        <div class="left-actions">
-                            <i class="far fa-heart"></i>
-                            <i class="far fa-comment"></i>
-                            <i class="far fa-paper-plane"></i>
-                        </div>
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <div class="post-likes">
-                        <span>2,547 likes</span>
-                    </div>
-                    <div class="post-caption">
-                        <span class="username">travel_life</span>
-                        <span class="caption">Sunrise at Ubud, Bali 🌅 The perfect start to a magical day! #bali #travel #ubud #sunrise #paradise</span>
-                    </div>
-                    <div class="post-comments">
-                        <div class="comment">
-                            <span class="username">wanderlust</span>
-                            <span>This is absolutely breathtaking! 😍</span>
-                        </div>
-                        <div class="comment">
-                            <span class="username">travel_photography</span>
-                            <span>What camera did you use? The colors are amazing!</span>
-                        </div>
-                        <div class="comment">
-                            <span class="username">bali_lover</span>
-                            <span>I was there last month! Best sunrise spot ever 🌅</span>
-                        </div>
-                    </div>
-                    <div class="post-time">
-                        <span>3 HOURS AGO</span>
-                    </div>
-                    <div class="post-add-comment">
-                        <i class="far fa-smile"></i>
-                        <input type="text" placeholder="Add a comment...">
-                        <button>Post</button>
-                    </div>
-                </div>
-
-                <div class="post">
-                    <div class="post-header">
-                        <div class="post-user">
-                            <img src="https://source.unsplash.com/random/100x100/?food" alt="User">
-                            <span>foodie_adventures</span>
-                        </div>
-                        <i class="fas fa-ellipsis-h"></i>
-                    </div>
-                    <div class="post-image">
-                        <img src="https://source.unsplash.com/random/800x800/?pasta" alt="Post">
-                    </div>
-                    <div class="post-actions">
-                        <div class="left-actions">
-                            <i class="far fa-heart"></i>
-                            <i class="far fa-comment"></i>
-                            <i class="far fa-paper-plane"></i>
-                        </div>
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <div class="post-likes">
-                        <span>1,892 likes</span>
-                    </div>
-                    <div class="post-caption">
-                        <span class="username">foodie_adventures</span>
-                        <span class="caption">Homemade truffle pasta with wild mushrooms 🍝 A perfect comfort food for rainy days! #foodie #pasta #homemade #foodphotography</span>
-                    </div>
-                    <div class="post-comments">
-                        <div class="comment">
-                            <span class="username">chef_life</span>
-                            <span>That looks incredible! Recipe please? 👨‍🍳</span>
-                        </div>
-                        <div class="comment">
-                            <span class="username">food_lover</span>
-                            <span>I can almost smell it through the screen! 😋</span>
-                        </div>
-                    </div>
-                    <div class="post-time">
-                        <span>5 HOURS AGO</span>
-                    </div>
-                    <div class="post-add-comment">
-                        <i class="far fa-smile"></i>
-                        <input type="text" placeholder="Add a comment...">
-                        <button>Post</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sidebar">
+            <div class="sidebar-footer">
                 <div class="user-profile">
                     <img src="https://source.unsplash.com/random/100x100/?portrait" alt="Profile">
-                    <div class="user-info">
-                        <span class="username">your_username</span>
-                        <span class="name">Your Name</span>
-                    </div>
-                    <button class="switch">Switch</button>
+                    <span>Your Name</span>
                 </div>
-                <div class="suggestions">
-                    <div class="suggestions-header">
-                        <span>Suggestions For You</span>
-                        <button>See All</button>
-                    </div>
-                    <div class="suggestion-item">
-                        <img src="https://source.unsplash.com/random/100x100/?photography" alt="Suggestion">
-                        <div class="suggestion-info">
-                            <span class="username">photography_pro</span>
-                            <span class="follow-text">Followed by travel_life</span>
-                        </div>
-                        <button class="follow">Follow</button>
-                    </div>
-                    <div class="suggestion-item">
-                        <img src="https://source.unsplash.com/random/100x100/?cooking" alt="Suggestion">
-                        <div class="suggestion-info">
-                            <span class="username">chef_mike</span>
-                            <span class="follow-text">Followed by foodie_adventures</span>
-                        </div>
-                        <button class="follow">Follow</button>
-                    </div>
-                    <div class="suggestion-item">
-                        <img src="https://source.unsplash.com/random/100x100/?fashion" alt="Suggestion">
-                        <div class="suggestion-info">
-                            <span class="username">style_guide</span>
-                            <span class="follow-text">New to Instagram</span>
-                        </div>
-                        <button class="follow">Follow</button>
-                    </div>
-                </div>
-                <div class="trending">
-                    <h3>Trending Hashtags</h3>
-                    <div class="hashtag">#travel2024</div>
-                    <div class="hashtag">#foodphotography</div>
-                    <div class="hashtag">#nature</div>
-                    <div class="hashtag">#fashion</div>
-                </div>
-                <div class="footer-links">
-                    <a href="#">About</a>
-                    <a href="#">Help</a>
-                    <a href="#">Press</a>
-                    <a href="#">API</a>
-                    <a href="#">Jobs</a>
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Locations</a>
-                    <a href="#">Language</a>
-                </div>
-                <div class="copyright">
-                    © 2024 INSTAGRAM CLONE
+                <button class="settings-btn">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-container">
+            <div class="chat-header">
+                <h1>AI Assistant</h1>
+                <div class="header-actions">
+                    <button class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </div>
             </div>
-        </div>
-    </main>
 
+            <div class="chat-messages">
+                <div class="message ai-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Hello! I'm your AI assistant. How can I help you today?</p>
+                    </div>
+                </div>
+
+                <div class="message user-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Can you help me learn about web development?</p>
+                    </div>
+                </div>
+
+                <div class="message ai-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Of course! Web development is a great field to explore. Let's start with the basics:</p>
+                        <ul>
+                            <li>HTML - Structure of web pages</li>
+                            <li>CSS - Styling and layout</li>
+                            <li>JavaScript - Interactivity and functionality</li>
+                        </ul>
+                        <p>Which aspect would you like to learn more about?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        placeholder="Type your message here..." 
+                        class="chat-input"
+                        rows="1"
+                    ></textarea>
+                    <button class="send-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="input-footer">
+                    <span>AI Assistant may produce inaccurate information about people, places, or facts.</span>
+                </div>
+            </div>
+        </main>
+    </div>
     <script src="script.js"></script>
 </body>
 </html> 

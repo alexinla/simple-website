@@ -329,4 +329,150 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         showNotification('New follower: @instagram_user');
     }, 5000);
+
+    const chatInput = document.querySelector('.chat-input');
+    const sendButton = document.querySelector('.send-button');
+    const chatMessages = document.querySelector('.chat-messages');
+    const newChatBtn = document.querySelector('.new-chat-btn');
+    const themeToggle = document.querySelector('.theme-toggle');
+    const historyItems = document.querySelectorAll('.history-item');
+
+    // Auto-resize textarea
+    chatInput.addEventListener('input', () => {
+        chatInput.style.height = 'auto';
+        chatInput.style.height = chatInput.scrollHeight + 'px';
+    });
+
+    // Send message function
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        if (message) {
+            // Add user message
+            addMessage(message, 'user');
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+
+            // Simulate AI response
+            setTimeout(() => {
+                const aiResponse = getAIResponse(message);
+                addMessage(aiResponse, 'ai');
+            }, 1000);
+        }
+    }
+
+    // Add message to chat
+    function addMessage(content, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${type}-message`;
+        
+        const avatar = document.createElement('div');
+        avatar.className = 'message-avatar';
+        avatar.innerHTML = `<i class="fas fa-${type === 'ai' ? 'robot' : 'user'}"></i>`;
+        
+        const messageContent = document.createElement('div');
+        messageContent.className = 'message-content';
+        
+        // Handle markdown-like formatting
+        const formattedContent = formatMessage(content);
+        messageContent.innerHTML = formattedContent;
+        
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(messageContent);
+        chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Format message content (simple markdown)
+    function formatMessage(content) {
+        // Convert lists
+        content = content.replace(/^- (.+)$/gm, '<li>$1</li>');
+        if (content.includes('<li>')) {
+            content = `<ul>${content}</ul>`;
+        }
+        
+        // Convert paragraphs
+        content = content.split('\n\n').map(p => `<p>${p}</p>`).join('');
+        
+        return content;
+    }
+
+    // Simulate AI response
+    function getAIResponse(message) {
+        const responses = {
+            'hello': 'Hello! How can I help you today?',
+            'help': 'I can help you with various topics. Just ask me anything!',
+            'web development': 'Web development involves HTML, CSS, and JavaScript. Would you like to learn more about any specific aspect?',
+            'python': 'Python is a versatile programming language. What would you like to know about it?',
+            'default': 'I understand. Could you please provide more details about what you\'d like to know?'
+        };
+
+        message = message.toLowerCase();
+        for (let key in responses) {
+            if (message.includes(key)) {
+                return responses[key];
+            }
+        }
+        return responses.default;
+    }
+
+    // Event listeners
+    sendButton.addEventListener('click', sendMessage);
+
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    // New chat button
+    newChatBtn.addEventListener('click', () => {
+        chatMessages.innerHTML = '';
+        addMessage('Hello! I\'m your AI assistant. How can I help you today?', 'ai');
+    });
+
+    // Theme toggle
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        const icon = themeToggle.querySelector('i');
+        icon.classList.toggle('fa-moon');
+        icon.classList.toggle('fa-sun');
+    });
+
+    // Chat history items
+    historyItems.forEach(item => {
+        item.addEventListener('click', () => {
+            historyItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            // In a real app, this would load the selected chat
+        });
+    });
+
+    // Mobile sidebar toggle
+    const mobileMenuBtn = document.createElement('button');
+    mobileMenuBtn.className = 'mobile-menu-btn';
+    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    document.querySelector('.chat-header').prepend(mobileMenuBtn);
+
+    mobileMenuBtn.addEventListener('click', () => {
+        document.querySelector('.sidebar').classList.toggle('active');
+    });
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+        const sidebar = document.querySelector('.sidebar');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        
+        if (window.innerWidth <= 768 && 
+            !sidebar.contains(e.target) && 
+            !mobileMenuBtn.contains(e.target) && 
+            sidebar.classList.contains('active')) {
+            sidebar.classList.remove('active');
+        }
+    });
+
+    // Initial welcome message
+    addMessage('Hello! I\'m your AI assistant. How can I help you today?', 'ai');
 }); 
